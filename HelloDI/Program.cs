@@ -1,6 +1,7 @@
-﻿using System;
-using System.Configuration;
+﻿using System.Configuration;
 using System.Threading;
+using HelloDI.RuntimeDependencies;
+using HelloDI.ShortLivedDependencies;
 
 namespace HelloDI
 {
@@ -14,73 +15,42 @@ namespace HelloDI
             //IMessageWriter writer = (IMessageWriter)Activator.CreateInstance(type);
 
 
-            IMessageWriter writer = new ConsoleMessageWriter();
-            IMessageWriter secureWriter = new DecoratedMessageWriter(writer);
-            var salutation = new Salutation(secureWriter);
+            //IMessageWriter writer = new ConsoleMessageWriter();
+            //IMessageWriter secureWriter = new DecoratedMessageWriter(writer);
+            //var salutation = new Salutation(secureWriter);
 
 
             //IMessageWriter writer = new ConsoleMessageWriter();
             //var salutation = new Salutation(writer);
 
+            //salutation.Exclaim();
+
+
+
+
+            #region Resolving dependencies by runtime values
+
+            //IMessageWriter writer = new ConsoleMessageWriter();
+            //ISalutationProvider salutationProvider = new SalutationProvider(writer);
+
+            //var salutation = new LocalizedSalutation(salutationProvider);
+
+            //salutation.Exclaim(Language.Spanish);
+            //salutation.Exclaim(Language.German);
+
+            #endregion
+
+
+            IWriterFactory writerFactory = new WriterFactory();
+            IMessageWriter writer = new FileMessageWriter(writerFactory);
+            var salutation = new Salutation(writer);
+
             salutation.Exclaim();
-        }
-    }
+            salutation.Exclaim();
+            salutation.Exclaim();
 
-    public class Salutation
-    {
-        private readonly IMessageWriter _writer;
+            
 
-        public Salutation(IMessageWriter writer)
-        {
-            if (writer == null)
-                throw new ArgumentNullException(nameof(writer));
-
-            _writer = writer;
-        }
-
-        public void Exclaim()
-        {
-            _writer.Write("Hello DI!");
-        }
-    }
-
-    public interface IMessageWriter
-    {
-        void Write(string message);
-    }
-
-    public class ConsoleMessageWriter : IMessageWriter
-    {
-        public void Write(string message)
-        {
-            Console.WriteLine(message);
-        }
-    }
-
-    public class LateBindedConsoleMessageWriter : IMessageWriter
-    {
-        public void Write(string message)
-        {
-            Console.WriteLine($"{message} - late binding message writer");
-        }
-    }
-
-    public class DecoratedMessageWriter : IMessageWriter
-    {
-        private readonly IMessageWriter _writer;
-
-        public DecoratedMessageWriter(IMessageWriter writer)
-        {
-            if (writer == null)
-                throw new ArgumentNullException(nameof(writer));
-
-            _writer = writer;
-        }
-
-        public void Write(string message)
-        {
-            var decoratedMessage = $"{message} - decorated";
-                _writer.Write(decoratedMessage);
         }
     }
 }

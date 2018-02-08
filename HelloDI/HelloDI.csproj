@@ -44,8 +44,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConsoleMessageWriter.cs" />
+    <Compile Include="Interception\DecoratedMessageWriter.cs" />
+    <Compile Include="IMessageWriter.cs" />
+    <Compile Include="LateBinding\LateBindedConsoleMessageWriter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RuntimeDependencies\GermanSalutation.cs" />
+    <Compile Include="RuntimeDependencies\ISalutationProvider.cs" />
+    <Compile Include="RuntimeDependencies\Language.cs" />
+    <Compile Include="RuntimeDependencies\LocalizedSalutation.cs" />
+    <Compile Include="RuntimeDependencies\SalutationProvider.cs" />
+    <Compile Include="RuntimeDependencies\SpanishSalutation.cs" />
+    <Compile Include="Salutation.cs" />
+    <Compile Include="RuntimeDependencies\SalutationBase.cs" />
+    <Compile Include="ShortLivedDependencies\FileMessageWriter.cs" />
+    <Compile Include="ShortLivedDependencies\FileWriter.cs" />
+    <Compile Include="ShortLivedDependencies\IFileWriter.cs" />
+    <Compile Include="ShortLivedDependencies\IWriterFactory.cs" />
+    <Compile Include="ShortLivedDependencies\WriterFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
