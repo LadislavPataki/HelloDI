@@ -2,7 +2,6 @@
 
 namespace HelloDI
 {
-
     public class Salutation
     {
         private readonly IMessageWriter _writer;

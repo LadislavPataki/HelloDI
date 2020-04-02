@@ -47,7 +47,8 @@
     <Compile Include="ConsoleMessageWriter.cs" />
     <Compile Include="Interception\DecoratedMessageWriter.cs" />
     <Compile Include="IMessageWriter.cs" />
-    <Compile Include="LateBinding\LateBindedConsoleMessageWriter.cs" />
+    <Compile Include="Interception\SecureMessageWriter.cs" />
+    <Compile Include="LateBinding\LateBoundConsoleMessageWriter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RuntimeDependencies\GermanSalutation.cs" />

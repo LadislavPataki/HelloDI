@@ -8,10 +8,7 @@ namespace HelloDI.Interception
 
         public DecoratedMessageWriter(IMessageWriter writer)
         {
-            if (writer == null)
-                throw new ArgumentNullException(nameof(writer));
-
-            _writer = writer;
+            _writer = writer ?? throw new ArgumentNullException(nameof(writer));
         }
 
         public void Write(string message)
